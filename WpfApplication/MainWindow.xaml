@@ -1,0 +1,110 @@
+﻿<Window x:Class="WpfApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication"
+        mc:Ignorable="d"
+        Title="Jawis Configuration" SizeToContent="WidthAndHeight"
+        Icon="jawis.ico"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        >
+    <Window.Resources>
+        <Style x:Key="HeaderStyle" TargetType="Label">
+            <!--<Setter Property="FontWeight" Value="Medium" /> -->
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
+        <Style x:Key="TextStyle" TargetType="TextBlock">
+            <!--<Setter Property="FontWeight" Value="Medium" /> -->
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,10" Background="LightGray">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit" Click="mnuExit_Click"/>
+                <MenuItem Header="_About" Click="mnuAbount_Click"/>
+            </MenuItem>
+        </Menu>
+
+
+        <Label  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource HeaderStyle}">Jobs</Label>
+        <ListBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Name="lbJobs" HorizontalContentAlignment="Stretch" MinHeight="100" MinWidth="400">
+            <ListBox.Resources>
+                <!--Defines a context menu-->
+                <ContextMenu x:Key="RootFolderMenu">
+                    <MenuItem Header="Details" Click="MenuItemDetails_Click"/>
+                    <MenuItem Header="Properties" Click="MenuItemProperties_Click"/>
+                    <MenuItem Header="Delete" Click="MenuItemDelete_Click"/>
+                </ContextMenu>
+            </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid ContextMenu="{StaticResource RootFolderMenu}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Config.Executable}" />
+                        <Viewbox Width="16" Height="16" Grid.Column="1">
+                            <Canvas Width="24" Height="24">
+                                <Path Data="{Binding Icon.Data}"  Fill="{Binding Icon.Fill}" />
+                            </Canvas>
+                        </Viewbox>
+                    </Grid>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Grid.Row="3" Grid.Column="3" Name="btnNewJob" Click="btnNewJob_Click">
+            <Viewbox Width="24" Height="24">
+                <Canvas Width="24" Height="24">
+                    <Path Data="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" 
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" />
+                </Canvas>
+            </Viewbox>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Add new job to list.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+
+
+
+        <Separator Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" />
+
+        <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource HeaderStyle}">Jawis Service</Label>
+        <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource TextStyle}" Text="Status " />
+        <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource TextStyle}" Text=":" />
+        <TextBlock Grid.Row="6" Grid.Column="2" Style="{StaticResource TextStyle}" Name="tbServiceStatus">Reading status ...</TextBlock>
+        <Viewbox Grid.Row="6" Grid.Column="3" Width="24" Height="24">
+            <Canvas Width="24" Height="24">
+                <Path Name="iconHeart" Data="M7.5,4A5.5,5.5 0 0,0 2,9.5C2,10 2.09,10.5 2.22,11H6.3L7.57,7.63C7.87,6.83 9.05,6.75 9.43,7.63L11.5,13L12.09,11.58C12.22,11.25 12.57,11 13,11H21.78C21.91,10.5 22,10 22,9.5A5.5,5.5 0 0,0 16.5,4C14.64,4 13,4.93 12,6.34C11,4.93 9.36,4 7.5,4V4M3,12.5A1,1 0 0,0 2,13.5A1,1 0 0,0 3,14.5H5.44L11,20C12,20.9 12,20.9 13,20L18.56,14.5H21A1,1 0 0,0 22,13.5A1,1 0 0,0 21,12.5H13.4L12.47,14.8C12.07,15.81 10.92,15.67 10.55,14.83L8.5,9.5L7.54,11.83C7.39,12.21 7.05,12.5 6.6,12.5H3Z" 
+                                  Fill="#eeeeee" />
+            </Canvas>
+        </Viewbox>
+    </Grid>
+</Window>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)\ProductInfo.wxi?>
+  <?include $(sys.CURRENTDIR)\Pathes.wxi?>
+
+  <Product Id="*" Name="$(var.ProductName) V$(var.MajorVersion).$(var.MinorVersion).$(var.PatchVersion)" Language="1033"
+           Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="{22DF1AED-C59E-4E73-9502-852FA88E37C8}">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Media Id="1" Cabinet="Jawis.cab" EmbedCab="yes" />
+
+    <Icon Id='ProductIcon' SourceFile='$(var.SolutionItems.Path)\jawis.ico' />
+    <Property Id='ARPPRODUCTICON' Value='ProductIcon' />
+  
+      
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="DesktopFolder" Name="Desktop" />
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLLOCATION" Name="Jawis">
+
+          <Component Id="JawisConfigurationDialog" Guid="{47186963-8E62-44C6-ABB5-8B7DAA7FDD63}">
+            <File Source="$(var.JawisDialog.BinPath)\Jawis.CoreImpl.dll" />
+            <File Source="$(var.JawisDialog.BinPath)\Jawis.CoreImpl.pdb" />
+            <File Source="$(var.JawisDialog.BinPath)\Jawis.CoreShared.dll" />
+            <File Source="$(var.JawisDialog.BinPath)\Jawis.CoreShared.pdb" />
+
+            <File Source="$(var.JawisDialog.BinPath)\log4net.dll" />
+            <File Source="$(var.JawisDialog.BinPath)\MaterialDesignColors.dll" />
+            <File Source="$(var.JawisDialog.BinPath)\MaterialDesignThemes.Wpf.dll" />
+            <File Source="$(var.JawisDialog.BinPath)\Newtonsoft.Json.dll" />
+         
+            <File Source="$(var.JawisDialog.BinPath)\Jawis.WpfApplication.exe"  KeyPath="yes">
+              <Shortcut Id="DesktopShortcutServiceConfigurationDialog"
+                  Directory="DesktopFolder"
+                  Name="Jawis"
+                  Description="ConfigDialog for Jawis"
+                  WorkingDirectory="INSTALLLOCATION"
+                  Icon="Jawis.WpfApplication.exe"
+                  IconIndex="0"
+                  Advertise="yes" >
+                <Icon Id="Jawis.WpfApplication.exe" SourceFile="$(var.JawisDialog.BinPath)\Jawis.WpfApplication.exe" />
+              </Shortcut>
+            </File>
+            <File Source="$(var.JawisDialog.BinPath)\Jawis.WpfApplication.pdb" />
+            <File Source="$(var.JawisDialog.BinPath)\Jawis.WpfApplication.exe.config" />
+            <File Source="$(var.JawisDialog.BinPath)\ProductInfo.xml" />
+            <File Source="$(var.JawisDialog.BinPath)\jawis.ico" />
+
+          </Component>
+          
+          <Component Id="JawisService" Guid="{A5EBCDEF-752B-4C99-8090-16603D1B1DEC}">
+            <File Source="$(var.JawisService.BinPath)\Jawis.WindowsService.exe" />
+            <File Source="$(var.JawisService.BinPath)\Jawis.WindowsService.pdb" />
+            <File Source="$(var.JawisService.BinPath)\Jawis.WindowsService.exe.config" />
+           
+            <ServiceInstall
+             Id="ServiceInstaller"
+             Type="ownProcess"
+             Vital="yes"
+             Name="Jawis"
+             DisplayName="Jawis"
+             Description="Startet Java-Application im Windowsservice"
+             Start="auto"
+             Account="LocalSystem"
+             ErrorControl="ignore"
+             Interactive="no"
+              >
+            </ServiceInstall>
+            <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="Jawis" Wait="yes" />
+            
+            
+          </Component>
+
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="ProductFeature" Title="SetupImportService" Level="1">
+      <ComponentRef Id="JawisConfigurationDialog" />
+      <ComponentRef Id="JawisService" />
+    </Feature>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" ></Property>
+    <UIRef Id="WixUI_InstallDir"/>
+
+    <WixVariable Id="WixUILicenseRtf" Value="licence.rtf" />
+    <WixVariable Id="WixUIDialogBmp" Value="InstallerBackground.bmp"/>
+
+    <Upgrade Id="{22DF1AED-C59E-4E73-9502-852FA88E37C8}">
+      <UpgradeVersion Minimum="$(var.Version)" IncludeMinimum="no" OnlyDetect="yes" Property="NEWERVERSIONDETECTED" />
+      <UpgradeVersion Minimum="0.0.0" Maximum="$(var.Version)" IncludeMinimum="yes" IncludeMaximum="yes" Property="OLDERVERSIONBEINGUPGRADED" />
+    </Upgrade>
+
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+      <Custom Action="NewerVersion" After="FindRelatedProducts">NEWERVERSIONDETECTED</Custom>
+    </InstallExecuteSequence>
+
+    <CustomAction Id="NewerVersion" Error="A later version of [ProductName] is already installed." />
+
+
+
+  
+  </Product>
+ </Wix>
