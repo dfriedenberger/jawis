@@ -43,6 +43,7 @@
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,10" Background="LightGray">
             <MenuItem Header="_File">
                 <MenuItem Header="_Exit" Click="mnuExit_Click"/>
+                <MenuItem Header="_Options..." Click="mnuOptions_Click"/>
                 <MenuItem Header="_About" Click="mnuAbount_Click"/>
             </MenuItem>
         </Menu>

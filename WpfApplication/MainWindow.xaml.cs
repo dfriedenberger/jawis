@@ -59,8 +59,11 @@ namespace WpfApplication
         {
             //Read ServiceStatus
             var serverStatus = CoreFactory.StatusService.GetServiceStatus();
-            tbServiceStatus.Text = serverStatus.State.ToString();
-            iconHeart.Fill = serverStatus.State == ServiceState.Running ? Brushes.Green : Brushes.Gray;
+            if (serverStatus != null)
+            {
+                tbServiceStatus.Text = serverStatus.State.ToString();
+                iconHeart.Fill = serverStatus.State == ServiceState.Running ? Brushes.Green : Brushes.Gray;
+            }
             //Read Job Status
             var jobstatus = CoreFactory.StatusService.GetJobStatus();
 
@@ -112,12 +115,27 @@ namespace WpfApplication
             System.Windows.Application.Current.Shutdown();
         }
 
-        private void mnuAbount_Click(object sender, RoutedEventArgs e)
+        private void mnuOptions_Click(object sender, RoutedEventArgs e)
         {
-            About dialog = new About();
-            dialog.ShowDialog();
+            OptionsWindows dialog = new OptionsWindows();
+
+
+            dialog.Options = CoreFactory.ConfigurationService.GetOptions();
+
+            if (dialog.ShowDialog() == true)
+            {
+                //set config
+                CoreFactory.ConfigurationService.SetOptions(dialog.Options);
+            }
         }
 
+        private void mnuAbount_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow dialog = new AboutWindow();
+            dialog.ShowDialog();
+        }
+     
+        
 
         private void MenuItemDetails_Click(object sender, RoutedEventArgs e)
         {

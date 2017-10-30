@@ -25,6 +25,7 @@ namespace CoreImpl
         public Guid Id { get { return _id; } }
 
         public DateTime StopTime { get; private set; }
+        public Options Options { get; internal set; }
 
         public void Kill()
         {
@@ -55,7 +56,12 @@ namespace CoreImpl
             State = JobState.Running;
             ProcessStartInfo startInfo = new ProcessStartInfo();
 
-            startInfo.FileName = "java";
+
+            if (Options.UseFromPath)
+                startInfo.FileName = "java";
+            else
+                startInfo.FileName = Options.JavaBinary;
+
             startInfo.Arguments = " " + "-jar "+Config.Executable+" "+Config.Arguments;
             startInfo.WorkingDirectory = Config.WorkingDirectory;
 

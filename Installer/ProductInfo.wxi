@@ -7,7 +7,7 @@
   -->
 
   <?define MajorVersion="1" ?>
-  <?define MinorVersion="0" ?>
+  <?define MinorVersion="1" ?>
   <?define PatchVersion="0" ?>
   
   <?define Manufacturer="Dirk Friedenberger" ?>

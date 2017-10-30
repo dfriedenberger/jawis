@@ -13,5 +13,7 @@ namespace CoreShared.Service
         void UpdateJob(Job job);
         IList<Job> GetJobs();
         void DeleteJob(Job job);
+        Options GetOptions();
+        void SetOptions(Options options);
     }
 }

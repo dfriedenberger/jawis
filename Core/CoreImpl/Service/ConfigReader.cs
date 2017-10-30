@@ -1,5 +1,6 @@
 ﻿using CoreShared.BO;
 using CoreShared.Service;
+using log4net;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace CoreImpl.Service
 {
     class ConfigReader : IConfigReader
     {
+        private readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private IPathService _pathService;
 
         public ConfigReader(IPathService pathService)
@@ -39,8 +42,24 @@ namespace CoreImpl.Service
         {
             var configFile = Path.Combine(_pathService.StatusPath, key + ".json");
             if (!File.Exists(configFile)) return null;
-            var jsondata = File.ReadAllText(configFile);
-            return JsonConvert.DeserializeObject<T>(jsondata);
+            try
+            {
+                var jsondata = ReadAllText(configFile);
+                return JsonConvert.DeserializeObject<T>(jsondata);
+            } catch(Exception e)
+            {
+                _log.Error(e);
+                return null;
+            }
+        }
+
+        private string ReadAllText(string configFile)
+        {
+            using (var fs = new FileStream(configFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var sr = new StreamReader(fs, Encoding.Default))
+            {
+                return sr.ReadToEnd();
+            }
         }
 
         public void WriteStatus<T>(string key, T data) where T : class

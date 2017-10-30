@@ -42,10 +42,11 @@ namespace CoreImpl
             return new Scheduler(ConfigurationService, StatusService, new ScheduleCalculator());
         }
 
-        public static IJobManager CreateJobManagerInstance(Job job)
+        public static IJobManager CreateJobManagerInstance(Job job,Options options)
         {
             return new JobManager() {
                 Config = job,
+                Options = options,
                 State = JobState.Init
             };
         }

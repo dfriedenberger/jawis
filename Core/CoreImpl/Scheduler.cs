@@ -98,7 +98,7 @@ namespace CoreImpl
         {
             _log.DebugFormat("Cycle {0:D2}:{1:D2} Uhr / Running Jobs {2}", now.Hour, now.Minute, RunningJobs.Count);
 
-
+            var options = _configurationService.GetOptions();
             var jobs = _configurationService.GetJobs();
             var history = _statusService.GetHistory();
 
@@ -161,7 +161,7 @@ namespace CoreImpl
                 }
 
                 _log.InfoFormat("Try Start Job {0}", job.Executable);
-                var jobManager = CoreFactory.CreateJobManagerInstance(job);
+                var jobManager = CoreFactory.CreateJobManagerInstance(job, options);
                 jobManager.Start();
                 RunningJobs.Add(jobManager);
                 _statusService.TraceStart(jobManager);

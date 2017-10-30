@@ -53,5 +53,22 @@ namespace CoreImpl.Service
             _configReader.WriteConfig("jobs", jobs);
 
         }
+
+        public Options GetOptions()
+        {
+            var options = _configReader.ReadConfig<Options>("jawis");
+            if (options == null)
+                return new Options()
+                {
+                    JavaBinary = "",
+                    UseFromPath = true
+                };
+            return options;
+        }
+
+        public void SetOptions(Options options)
+        {
+            _configReader.WriteConfig("jawis", options);
+        }
     }
 }
