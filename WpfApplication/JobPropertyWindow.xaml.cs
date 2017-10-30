@@ -56,9 +56,18 @@ namespace WpfApplication
             txtArguments.Text = Job.Config.Arguments;
             txtFolder.Text = Job.Config.WorkingDirectory;
 
-            minute.Text = string.Format("{0}",Job.Config.Schedule.Minute);
-            timeHour.Text = string.Format("{0:00}",Job.Config.Schedule.TimeMinute);
-            timeMinute.Text = string.Format("{0:00}",Job.Config.Schedule.TimeHour);
+            cycleValue.Text = string.Format("{0}",Job.Config.Schedule.CycleValue);
+
+
+            foreach (var e in Enum.GetValues(typeof(CycleUnit)).Cast<CycleUnit>())
+            {
+                cycleUnit.Items.Add(e);
+            }
+            cycleUnit.SelectedItem = Job.Config.Schedule.CycleUnit;
+
+
+            timeHour.Text = string.Format("{0:00}",Job.Config.Schedule.TimeHour);
+            timeMinute.Text = string.Format("{0:00}",Job.Config.Schedule.TimeMinute);
             rbGrpSchedule.Single(rb => rb.Name.EndsWith(Job.Config.Schedule.Type.ToString())).IsChecked = true;
             
         }
@@ -74,7 +83,8 @@ namespace WpfApplication
 
             var type = rbGrpSchedule.Single(rb => rb.IsChecked == true).Name.Substring(2);
             Job.Config.Schedule.Type = (ScheduleType)Enum.Parse(typeof(ScheduleType), type);
-            Job.Config.Schedule.Minute = int.Parse(minute.Text);
+            Job.Config.Schedule.CycleValue = int.Parse(cycleValue.Text);
+            Job.Config.Schedule.CycleUnit = (CycleUnit)Enum.Parse(typeof(CycleUnit), cycleUnit.SelectedItem.ToString());
             Job.Config.Schedule.TimeHour = int.Parse(timeHour.Text);
             Job.Config.Schedule.TimeMinute = int.Parse(timeMinute.Text);
            

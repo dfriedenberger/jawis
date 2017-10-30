@@ -203,7 +203,8 @@ namespace WpfApplication
                     Schedule = new Schedule()
                     {
                         Type = ScheduleType.Ever,
-                        Minute = 1,
+                        CycleValue = 1,
+                        CycleUnit = CycleUnit.minutes,
                         TimeHour = 8,
                         TimeMinute = 0
                     }

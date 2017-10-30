@@ -4,7 +4,9 @@
     {
         public ScheduleType Type { get; set; }
 
-        public int Minute { get; set; }
+        public int CycleValue { get; set; }
+        public CycleUnit CycleUnit { get; set; }
+
         public int TimeMinute { get; set; }
         public int TimeHour { get; set; }
 

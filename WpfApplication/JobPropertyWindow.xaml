@@ -100,8 +100,8 @@
             </Grid.ColumnDefinitions>
             <RadioButton Grid.Column="0" GroupName="Schedule" Name="rbEveryXMinute" VerticalAlignment="Center"/>
             <TextBlock Grid.Column="1" Text="Every" VerticalAlignment="Center" />
-            <TextBox Grid.Column="2" Name="minute" MinWidth="15" Padding="5,0,5,0" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="3" Text="minute" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="2" Name="cycleValue" MinWidth="15" Padding="5,0,5,0" VerticalAlignment="Center"/>
+            <ComboBox Grid.Column="3" Name="cycleUnit" VerticalAlignment="Center"/>
         </Grid>
         
         <!-- Every Day -->

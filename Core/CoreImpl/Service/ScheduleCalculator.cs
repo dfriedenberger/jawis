@@ -18,9 +18,9 @@ namespace CoreImpl.Service
                 case ScheduleType.Ever:
                     return true;
                 case ScheduleType.EveryXMinute:
-                    return span.TotalMinutes > schedule.Minute;
+                    return span.TotalMinutes > schedule.CycleValue * (int)schedule.CycleUnit;
                 case ScheduleType.DailyAtX:
-                    return (schedule.TimeHour == now.Hour && schedule.Minute == now.Minute);
+                    return (schedule.TimeHour == now.Hour && schedule.TimeMinute == now.Minute);
             }
             return false;
         }

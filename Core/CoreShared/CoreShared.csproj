@@ -49,6 +49,7 @@
     <Compile Include="..\..\SolutionItems\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BO\CycleUnit.cs" />
     <Compile Include="BO\Job.cs" />
     <Compile Include="BO\JobHistory.cs" />
     <Compile Include="BO\JobState.cs" />
