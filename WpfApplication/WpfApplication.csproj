@@ -81,7 +81,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="JobDetails.xaml">
+    <Page Include="JobHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,8 +106,8 @@
     <Compile Include="BO\UICanvasIcon.cs" />
     <Compile Include="BO\UIHistory.cs" />
     <Compile Include="BO\UIJob.cs" />
-    <Compile Include="JobDetails.xaml.cs">
-      <DependentUpon>JobDetails.xaml</DependentUpon>
+    <Compile Include="JobHistory.xaml.cs">
+      <DependentUpon>JobHistory.xaml</DependentUpon>
     </Compile>
     <Compile Include="JobPropertyWindow.xaml.cs">
       <DependentUpon>JobPropertyWindow.xaml</DependentUpon>

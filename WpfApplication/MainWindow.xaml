@@ -54,7 +54,7 @@
             <ListBox.Resources>
                 <!--Defines a context menu-->
                 <ContextMenu x:Key="RootFolderMenu">
-                    <MenuItem Header="Details" Click="MenuItemDetails_Click"/>
+                    <MenuItem Header="History" Click="MenuItemHistory_Click"/>
                     <MenuItem Header="Properties" Click="MenuItemProperties_Click"/>
                     <MenuItem Header="Delete" Click="MenuItemDelete_Click"/>
                 </ContextMenu>

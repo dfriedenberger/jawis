@@ -137,7 +137,7 @@ namespace WpfApplication
      
         
 
-        private void MenuItemDetails_Click(object sender, RoutedEventArgs e)
+        private void MenuItemHistory_Click(object sender, RoutedEventArgs e)
         {
             //Details
             var job = lbJobs.SelectedItem as UIJob;
@@ -154,7 +154,7 @@ namespace WpfApplication
                 });
             }
 
-            var dialog = new JobDetails(lst);
+            var dialog = new JobHistory(lst);
            
            
             dialog.ShowDialog();

@@ -17,12 +17,12 @@ using WpfApplication.BO;
 namespace WpfApplication
 {
     /// <summary>
-    /// Interaction logic for JobDetails.xaml
+    /// Interaction logic for JobHistory.xaml
     /// </summary>
-    public partial class JobDetails : Window
+    public partial class JobHistory : Window
     {
 
-        public JobDetails(ObservableCollection<UIHistory> History)
+        public JobHistory(ObservableCollection<UIHistory> History)
         {
             InitializeComponent();
             lbDetails.ItemsSource = History;
