@@ -13,12 +13,13 @@
         >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" MinWidth="25"/>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -78,8 +79,11 @@
 
         <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4">Schedule</Label>
 
+        <CheckBox Grid.Row="7" Grid.Column="0" Name="cbEnabled" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="7" Grid.Column="1" Text="Enabled" VerticalAlignment="Center" />
+
         <!-- Ever -->
-        <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3">
+        <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="25" />
                 <ColumnDefinition Width="Auto" />
@@ -91,7 +95,7 @@
 
 
         <!-- Every Minute -->
-        <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3">
+        <Grid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="25" />
                 <ColumnDefinition Width="Auto" />
@@ -105,7 +109,7 @@
         </Grid>
         
         <!-- Every Day -->
-        <Grid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3">
+        <Grid Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="25" />
                 <ColumnDefinition Width="Auto" />
@@ -123,9 +127,11 @@
 
         </Grid>
 
+      
+      
 
-        <Button Grid.Row="10" Grid.Column="2" IsDefault="True" Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60">_Ok</Button>
-        <Button Grid.Row="10" Grid.Column="3" IsCancel="True" MinWidth="60">_Cancel</Button>
+        <Button Grid.Row="11" Grid.Column="2" IsDefault="True" Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60">_Ok</Button>
+        <Button Grid.Row="11" Grid.Column="3" IsCancel="True" MinWidth="60">_Cancel</Button>
 
     </Grid>
 </Window>

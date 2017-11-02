@@ -14,5 +14,6 @@ namespace CoreShared.BO
         public Schedule Schedule { get; set; }
         public JobType Type { get; set; }
         public Guid Id { get; set; }
+        public bool Enabled { get; set; }
     }
 }

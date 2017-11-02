@@ -56,6 +56,9 @@ namespace WpfApplication
             txtArguments.Text = Job.Config.Arguments;
             txtFolder.Text = Job.Config.WorkingDirectory;
 
+
+            cbEnabled.IsChecked = Job.Config.Enabled;
+
             cycleValue.Text = string.Format("{0}",Job.Config.Schedule.CycleValue);
 
 
@@ -80,6 +83,8 @@ namespace WpfApplication
             Job.Config.Executable = txtExecutable.Text;
             Job.Config.Arguments = txtArguments.Text;
             Job.Config.WorkingDirectory = txtFolder.Text;
+
+            Job.Config.Enabled = cbEnabled.IsChecked.Value;
 
             var type = rbGrpSchedule.Single(rb => rb.IsChecked == true).Name.Substring(2);
             Job.Config.Schedule.Type = (ScheduleType)Enum.Parse(typeof(ScheduleType), type);

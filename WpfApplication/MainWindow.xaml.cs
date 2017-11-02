@@ -74,7 +74,10 @@ namespace WpfApplication
                 if(status == null)
                 {
                     //Todo Is Disabled
-                    icon = UICanvasIcon.Waiting;
+                    if (job.Config.Enabled == false)
+                        icon = UICanvasIcon.Disabled;
+                    else
+                        icon = UICanvasIcon.Waiting;
                 }
                 else
                 {
@@ -200,6 +203,7 @@ namespace WpfApplication
                     Executable = "",
                     Arguments = "",
                     WorkingDirectory = "",
+                    Enabled = true,
                     Schedule = new Schedule()
                     {
                         Type = ScheduleType.Ever,

@@ -110,7 +110,8 @@ namespace CoreImpl
                 switch(RunningJobs[i].State)
                 {
                     case JobState.Running:
-                        if(jobs.Count(j => j.Id == RunningJobs[i].Config.Id) == 0)
+                        var config = jobs.SingleOrDefault(j => j.Id == RunningJobs[i].Config.Id);
+                        if ((config == null) || (config.Enabled == false))
                         {
                             //Must Kill 
                             _log.InfoFormat("Kill job {0}", RunningJobs[i].Config.Executable);
@@ -149,7 +150,8 @@ namespace CoreImpl
                 //Should the job run?
                 _log.DebugFormat("Check {0}", job.Executable);
 
-                //Todo GetHistory
+                if (job.Enabled == false) continue;
+
                 if (!_scheduleCalculator.Match(job.Schedule, now, last)) continue;
 
                 //Todo check if jobs run
