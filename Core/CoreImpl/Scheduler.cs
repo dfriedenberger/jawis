@@ -143,7 +143,7 @@ namespace CoreImpl
 
                 var last = DateTime.MinValue;
 
-                var lastRun = history.Where(x => x.Type == TraceType.Start).OrderByDescending(x => x.Time).FirstOrDefault();
+                var lastRun = history.Where(x => x.Type == TraceType.Start && x.JobId == job.Id).OrderByDescending(x => x.Time).FirstOrDefault();
                 if (lastRun != null)
                     last = lastRun.Time;
 

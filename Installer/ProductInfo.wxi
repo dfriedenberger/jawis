@@ -8,7 +8,7 @@
 
   <?define MajorVersion="1" ?>
   <?define MinorVersion="1" ?>
-  <?define PatchVersion="0" ?>
+  <?define PatchVersion="1" ?>
   
   <?define Manufacturer="Dirk Friedenberger" ?>
   <?define ProductName="Jawis" ?>

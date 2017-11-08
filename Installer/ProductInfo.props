@@ -9,7 +9,7 @@
   <PropertyGroup>
     <MajorVersion>1</MajorVersion>
     <MinorVersion>1</MinorVersion>
-	<PatchVersion>0</PatchVersion>
+	<PatchVersion>1</PatchVersion>
     <ProductName>Jawis</ProductName>
   </PropertyGroup>
 </Project>
