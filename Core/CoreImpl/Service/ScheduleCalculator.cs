@@ -8,7 +8,7 @@ using CoreShared.BO;
 
 namespace CoreImpl.Service
 {
-    class ScheduleCalculator : IScheduleCalculator
+    public class ScheduleCalculator : IScheduleCalculator
     {
         public bool Match(Schedule schedule, DateTime now, DateTime last)
         {

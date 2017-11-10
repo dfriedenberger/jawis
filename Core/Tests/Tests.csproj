@@ -51,7 +51,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -60,11 +62,22 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\ScheduleCalculatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SolutionItems\Jawis.snk">
       <Link>Jawis.snk</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoreImpl\CoreImpl.csproj">
+      <Project>{a67e2df6-ce0b-4503-b7d6-6975f97aaf79}</Project>
+      <Name>CoreImpl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreShared\CoreShared.csproj">
+      <Project>{1f8896fc-1c08-44d8-a8e7-ceaa98d2d244}</Project>
+      <Name>CoreShared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
