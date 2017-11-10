@@ -87,5 +87,33 @@ namespace Tests.Service
 
         }
 
+
+        [TestMethod]
+        public void TestMatchRange()
+        {
+            IScheduleCalculator scheduleCalculator = new ScheduleCalculator();
+
+            Schedule schedule = new Schedule()
+            {
+                Continuous = false, //von 08:00 bis 09:00
+                TimeHourFrom = 8,
+                TimeMinuteFrom = 0,
+                TimeHourTo = 9,
+                TimeMinuteTo = 0
+            };
+
+            DateTime intime = DateTime.ParseExact("2009-05-08 08:00", "yyyy-MM-dd HH:mm",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+
+            DateTime outtime = DateTime.ParseExact("2009-05-08 07:59", "yyyy-MM-dd HH:mm",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            Assert.IsTrue(scheduleCalculator.MatchRange(schedule, intime));
+            Assert.IsFalse(scheduleCalculator.MatchRange(schedule, outtime));
+
+        }
+
+
     }
 }

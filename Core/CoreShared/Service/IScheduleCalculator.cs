@@ -10,5 +10,6 @@ namespace CoreShared.Service
     public interface IScheduleCalculator
     {
         bool Match(Schedule schedule, DateTime now, DateTime last);
+        bool MatchRange(Schedule schedule, DateTime now);
     }
 }

@@ -21,7 +21,11 @@ namespace CoreImpl.Service
                     return false;
             }
 
-            //check Range
+            return MatchRange(schedule, now);
+        }
+
+        public bool MatchRange(Schedule schedule, DateTime now)
+        {
             if (!schedule.Continuous)
             {
                 if (now.Hour < schedule.TimeHourFrom) return false;

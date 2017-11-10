@@ -111,7 +111,8 @@ namespace CoreImpl
                 {
                     case JobState.Running:
                         var config = jobs.SingleOrDefault(j => j.Id == RunningJobs[i].Config.Id);
-                        if ((config == null) || (config.Enabled == false))
+                        if ((config == null) || (config.Enabled == false) || 
+                            !_scheduleCalculator.MatchRange(config.Schedule,now))
                         {
                             //Must Kill 
                             _log.InfoFormat("Kill job {0}", RunningJobs[i].Config.Executable);
