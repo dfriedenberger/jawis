@@ -28,9 +28,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
 
@@ -79,59 +76,62 @@
 
         <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4">Schedule</Label>
 
-        <CheckBox Grid.Row="7" Grid.Column="0" Name="cbEnabled" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="7" Grid.Column="1" Text="Enabled" VerticalAlignment="Center" />
-
-        <!-- Ever -->
-        <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3">
+      
+        <!-- Cycle -->
+        <Grid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" MinWidth="25" />
                 <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="0" GroupName="Schedule" Name="rbEver" IsChecked="True" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="1" Text="Ever" VerticalAlignment="Center" />
-           
-        </Grid>
-
-
-        <!-- Every Minute -->
-        <Grid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" MinWidth="25" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" MinWidth="70"/>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="0" GroupName="Schedule" Name="rbEveryXMinute" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="1" Text="Every" VerticalAlignment="Center" />
-            <TextBox Grid.Column="2" Name="cycleValue" MinWidth="15" Padding="5,0,5,0" VerticalAlignment="Center"/>
-            <ComboBox Grid.Column="3" Name="cycleUnit" VerticalAlignment="Center"/>
-        </Grid>
-        
-        <!-- Every Day -->
-        <Grid Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" MinWidth="25" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="0" GroupName="Schedule" Name="rbDailyAtX" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="1" Text="Daily at" VerticalAlignment="Center" />
-            <TextBox Grid.Column="2" Name="timeHour" MinWidth="15" Padding="5,0,0,0" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="3" Text=":" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="4" Name="timeMinute" MinWidth="15" Padding="0,0,5,0" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="5" Text="o'clock" VerticalAlignment="Center"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
+            <CheckBox Grid.Row="0" Grid.Column="9" Name="cbEnabled"  VerticalAlignment="Center" />
+            <TextBlock Grid.Row="0" Grid.Column="10" Text="Enabled" VerticalAlignment="Center" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Center">Cycle:</TextBlock>
+
+            <TextBlock Grid.Row="2"  Grid.Column="0" Text="Every" VerticalAlignment="Center" />
+            <TextBox   Grid.Row="2"  Grid.Column="1" Name="cycleValue" MinWidth="15" Padding="5,0,5,0" VerticalAlignment="Center"/>
+            <ComboBox  Grid.Row="2"  Grid.Column="2" Grid.ColumnSpan="5" Name="cycleUnit" Height="25" VerticalAlignment="Center"/>
+            <CheckBox  Grid.Row="2"  Grid.Column="9" Name="cbEver" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="2"  Grid.Column="10" Text="Ever" VerticalAlignment="Center" />
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Center">Range:</TextBlock>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="from:" VerticalAlignment="Center" />
+            <TextBox   Grid.Row="4" Grid.Column="1" Name="timeHourFrom" MinWidth="15" Padding="5,0,0,0" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="4" Grid.Column="2" Text=":" VerticalAlignment="Center"/>
+            <TextBox   Grid.Row="4" Grid.Column="3" Name="timeMinuteFrom" MinWidth="15" Padding="0,0,5,0" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="4" Grid.Column="4" Text="to:" VerticalAlignment="Center"/>
+            <TextBox   Grid.Row="4" Grid.Column="5" Name="timeHourTo" MinWidth="15" Padding="5,0,0,0" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="4" Grid.Column="6" Text=":" VerticalAlignment="Center"/>
+            <TextBox   Grid.Row="4" Grid.Column="7" Name="timeMinuteTo" MinWidth="15" Padding="0,0,5,0" VerticalAlignment="Center"/>
+            <CheckBox  Grid.Row="4" Grid.Column="9" Name="cbContinuous" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="4" Grid.Column="10" Text="Continuous" VerticalAlignment="Center" />
         </Grid>
+
 
       
       
+      
 
-        <Button Grid.Row="11" Grid.Column="2" IsDefault="True" Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60">_Ok</Button>
-        <Button Grid.Row="11" Grid.Column="3" IsCancel="True" MinWidth="60">_Cancel</Button>
+        <Button Grid.Row="8" Grid.Column="2" IsDefault="True" Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60">_Ok</Button>
+        <Button Grid.Row="8" Grid.Column="3" IsCancel="True" MinWidth="60">_Cancel</Button>
 
     </Grid>
 </Window>

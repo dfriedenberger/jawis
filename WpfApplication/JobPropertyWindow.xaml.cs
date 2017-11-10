@@ -24,17 +24,10 @@ namespace WpfApplication
     public partial class JobPropertyWindow : Window
     {
         private UIJob _job;
-        private IList<System.Windows.Controls.RadioButton> rbGrpSchedule;
 
         public JobPropertyWindow()
         {
             InitializeComponent();
-            rbGrpSchedule = new List<System.Windows.Controls.RadioButton>()
-            {
-                rbEver,
-                rbEveryXMinute,
-                rbDailyAtX
-            };
         }
 
         public UIJob Job {
@@ -59,9 +52,9 @@ namespace WpfApplication
 
             cbEnabled.IsChecked = Job.Config.Enabled;
 
+            //cycle
+            cbEver.IsChecked = Job.Config.Schedule.Ever;
             cycleValue.Text = string.Format("{0}",Job.Config.Schedule.CycleValue);
-
-
             foreach (var e in Enum.GetValues(typeof(CycleUnit)).Cast<CycleUnit>())
             {
                 cycleUnit.Items.Add(e);
@@ -69,14 +62,16 @@ namespace WpfApplication
             cycleUnit.SelectedItem = Job.Config.Schedule.CycleUnit;
 
 
-            timeHour.Text = string.Format("{0:00}",Job.Config.Schedule.TimeHour);
-            timeMinute.Text = string.Format("{0:00}",Job.Config.Schedule.TimeMinute);
-            rbGrpSchedule.Single(rb => rb.Name.EndsWith(Job.Config.Schedule.Type.ToString())).IsChecked = true;
+            //Range
+            cbContinuous.IsChecked = Job.Config.Schedule.Continuous;
+            timeHourFrom.Text = string.Format("{0:00}",Job.Config.Schedule.TimeHourFrom);
+            timeMinuteFrom.Text = string.Format("{0:00}", Job.Config.Schedule.TimeMinuteFrom);
+            timeHourTo.Text = string.Format("{0:00}", Job.Config.Schedule.TimeHourTo);
+            timeMinuteTo.Text = string.Format("{0:00}", Job.Config.Schedule.TimeMinuteTo);
             
         }
 
-
-
+      
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
             Job.Config.Type = JobType.Java;
@@ -86,13 +81,17 @@ namespace WpfApplication
 
             Job.Config.Enabled = cbEnabled.IsChecked.Value;
 
-            var type = rbGrpSchedule.Single(rb => rb.IsChecked == true).Name.Substring(2);
-            Job.Config.Schedule.Type = (ScheduleType)Enum.Parse(typeof(ScheduleType), type);
+            //Cycle
+            Job.Config.Schedule.Ever = cbEver.IsChecked.Value;
             Job.Config.Schedule.CycleValue = int.Parse(cycleValue.Text);
             Job.Config.Schedule.CycleUnit = (CycleUnit)Enum.Parse(typeof(CycleUnit), cycleUnit.SelectedItem.ToString());
-            Job.Config.Schedule.TimeHour = int.Parse(timeHour.Text);
-            Job.Config.Schedule.TimeMinute = int.Parse(timeMinute.Text);
-           
+
+            //Range
+            Job.Config.Schedule.Continuous = cbContinuous.IsChecked.Value;
+            Job.Config.Schedule.TimeHourFrom = int.Parse(timeHourFrom.Text);
+            Job.Config.Schedule.TimeMinuteFrom = int.Parse(timeMinuteFrom.Text);
+            Job.Config.Schedule.TimeHourTo = int.Parse(timeHourTo.Text);
+            Job.Config.Schedule.TimeMinuteTo = int.Parse(timeMinuteTo.Text);
             this.DialogResult = true;
         }
 

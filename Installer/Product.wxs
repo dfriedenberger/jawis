@@ -51,7 +51,7 @@
             <File Source="$(var.JawisService.BinPath)\Jawis.WindowsService.exe" />
             <File Source="$(var.JawisService.BinPath)\Jawis.WindowsService.pdb" />
             <File Source="$(var.JawisService.BinPath)\Jawis.WindowsService.exe.config" />
-           
+            <File Source="$(var.JawisService.BinPath)\Jawis.StopProcessGracefully.exe" />
             <ServiceInstall
              Id="ServiceInstaller"
              Type="ownProcess"

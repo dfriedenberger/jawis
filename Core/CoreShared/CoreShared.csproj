@@ -57,7 +57,6 @@
     <Compile Include="BO\JobType.cs" />
     <Compile Include="BO\Options.cs" />
     <Compile Include="BO\Schedule.cs" />
-    <Compile Include="BO\ScheduleType.cs" />
     <Compile Include="BO\ServiceStatus.cs" />
     <Compile Include="BO\ServiceState.cs" />
     <Compile Include="BO\TraceType.cs" />

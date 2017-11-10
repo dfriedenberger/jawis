@@ -206,11 +206,15 @@ namespace WpfApplication
                     Enabled = true,
                     Schedule = new Schedule()
                     {
-                        Type = ScheduleType.Ever,
+                        Ever = false,
                         CycleValue = 1,
-                        CycleUnit = CycleUnit.minutes,
-                        TimeHour = 8,
-                        TimeMinute = 0
+                        CycleUnit = CycleUnit.hours,
+
+                        Continuous = false,
+                        TimeHourFrom = 8,
+                        TimeMinuteFrom = 0,
+                        TimeHourTo = 16,
+                        TimeMinuteTo= 0
                     }
                 },
                 Icon = UICanvasIcon.Init

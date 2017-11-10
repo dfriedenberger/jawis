@@ -85,6 +85,10 @@
       <Project>{1f8896fc-1c08-44d8-a8e7-ceaa98d2d244}</Project>
       <Name>CoreShared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StopProcessGracefully\StopProcessGracefully.csproj">
+      <Project>{bd95c7e3-1115-4a31-b1c7-186844b5f947}</Project>
+      <Name>StopProcessGracefully</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\SolutionItems\jawis.ico">

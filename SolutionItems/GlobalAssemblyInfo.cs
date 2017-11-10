@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 
 //Version fuer Anzeige in Software und Programme 
-[assembly: AssemblyVersion("1.1.1.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
 
 //statiische Version, bleibt so
 [assembly: AssemblyFileVersion("1.0.0.0")]

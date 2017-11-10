@@ -13,16 +13,24 @@ namespace CoreImpl.Service
         public bool Match(Schedule schedule, DateTime now, DateTime last)
         {
             TimeSpan span = now.Subtract(last);
-            switch (schedule.Type)
+
+            //check Cycle
+            if (!schedule.Ever)
             {
-                case ScheduleType.Ever:
-                    return true;
-                case ScheduleType.EveryXMinute:
-                    return span.TotalMinutes > schedule.CycleValue * (int)schedule.CycleUnit;
-                case ScheduleType.DailyAtX:
-                    return (schedule.TimeHour == now.Hour && schedule.TimeMinute == now.Minute);
+                if (span.TotalMinutes < schedule.CycleValue * (int)schedule.CycleUnit)
+                    return false;
             }
-            return false;
+
+            //check Range
+            if (!schedule.Continuous)
+            {
+                if (now.Hour < schedule.TimeHourFrom) return false;
+                if ((now.Hour == schedule.TimeHourFrom) && (now.Minute < schedule.TimeMinuteFrom)) return false;
+                if (schedule.TimeHourTo < now.Hour) return false;
+                if ((schedule.TimeHourTo == now.Hour) && (schedule.TimeMinuteTo < now.Minute)) return false;
+            }
+
+            return true;
         }
     }
 }
