@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{18459F22-ACD6-44D7-B8DA-7E2A51041AF8}</ProjectGuid>
+    <ProjectGuid>{BD95C7E3-1115-4A31-B1C7-186844B5F947}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jawis.ConsoleApplication</RootNamespace>
-    <AssemblyName>Jawis.ConsoleApplication</AssemblyName>
+    <RootNamespace>Jawis.StopProcessGracefully</RootNamespace>
+    <AssemblyName>Jawis.StopProcessGracefully</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -39,10 +39,6 @@
     <AssemblyOriginatorKeyFile>..\SolutionItems\Jawis.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,24 +59,7 @@
     <None Include="..\SolutionItems\Jawis.snk">
       <Link>Jawis.snk</Link>
     </None>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core\CoreImpl\CoreImpl.csproj">
-      <Project>{a67e2df6-ce0b-4503-b7d6-6975f97aaf79}</Project>
-      <Name>CoreImpl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core\CoreShared\CoreShared.csproj">
-      <Project>{1f8896fc-1c08-44d8-a8e7-ceaa98d2d244}</Project>
-      <Name>CoreShared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StopProcessGracefully\StopProcessGracefully.csproj">
-      <Project>{bd95c7e3-1115-4a31-b1c7-186844b5f947}</Project>
-      <Name>StopProcessGracefully</Name>
-    </ProjectReference>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,6 +8,8 @@ using CoreShared.BO;
 using System.Threading;
 using System.Diagnostics;
 using log4net;
+using System.IO;
+using System.Reflection;
 
 namespace CoreImpl
 {
@@ -40,6 +42,49 @@ namespace CoreImpl
             }
             State = JobState.Killed;
             _thread = null;
+        }
+
+        private void SendCtrlC(int pid)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+
+            var codebasePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            if(!Directory.Exists(codebasePath))
+            {
+                _log.ErrorFormat("Could not find Directory {0}", codebasePath);
+                return;
+            }
+            var StopProcessGracefully = Path.Combine(codebasePath, "Jawis.StopProcessGracefully.exe");
+
+            if (!File.Exists(StopProcessGracefully))
+            {
+                _log.ErrorFormat("Could not find File {0}", StopProcessGracefully);
+                return;
+            }
+
+            startInfo.FileName = StopProcessGracefully;
+            startInfo.Arguments = " -pid " + pid;
+            startInfo.WorkingDirectory = "";
+
+            startInfo.UseShellExecute = false;
+            startInfo.CreateNoWindow = true;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+
+            using (Process exeProcess = Process.Start(startInfo))
+            {
+                // signature to ErrorDataReceived and OutputDataReceived
+                exeProcess.ErrorDataReceived += (sender, errorLine) => { if (errorLine.Data != null) _log.Error(errorLine.Data); };
+                exeProcess.OutputDataReceived += (sender, outputLine) => { if (outputLine.Data != null) _log.Info(outputLine.Data); };
+
+                exeProcess.BeginErrorReadLine();
+                exeProcess.BeginOutputReadLine();
+
+                if (!exeProcess.WaitForExit(1000))
+                {
+                    exeProcess.Kill();
+                }
+            }
         }
 
         public void Start()
@@ -78,8 +123,8 @@ namespace CoreImpl
                 {
                     // You can pass any delegate that matches the appropriate 
                     // signature to ErrorDataReceived and OutputDataReceived
-                    exeProcess.ErrorDataReceived += (sender, errorLine) => { if (errorLine.Data != null) _log.Info(errorLine.Data); };
-                    exeProcess.OutputDataReceived += (sender, outputLine) => { if (outputLine.Data != null) _log.Error(outputLine.Data); };
+                    exeProcess.ErrorDataReceived += (sender, errorLine) => { if (errorLine.Data != null) _log.Error(errorLine.Data); };
+                    exeProcess.OutputDataReceived += (sender, outputLine) => { if (outputLine.Data != null) _log.Info(outputLine.Data); };
 
                     exeProcess.BeginErrorReadLine();
                     exeProcess.BeginOutputReadLine();
@@ -87,12 +132,15 @@ namespace CoreImpl
                     while (_shouldRun)
                     {
                         if (exeProcess.WaitForExit(1000)) break;
-                        
                     }
 
                     if (!_shouldRun)
                     {
-                        exeProcess.Kill();
+                        SendCtrlC(exeProcess.Id);
+                        if (!exeProcess.WaitForExit(1000))
+                        {
+                            exeProcess.Kill();
+                        }
                     }
 
 
@@ -114,6 +162,7 @@ namespace CoreImpl
             }
             StopTime = DateTime.Now;
         }
-       
+
+      
     }
 }
