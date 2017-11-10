@@ -68,10 +68,71 @@ namespace WpfApplication
             timeMinuteFrom.Text = string.Format("{0:00}", Job.Config.Schedule.TimeMinuteFrom);
             timeHourTo.Text = string.Format("{0:00}", Job.Config.Schedule.TimeHourTo);
             timeMinuteTo.Text = string.Format("{0:00}", Job.Config.Schedule.TimeMinuteTo);
-            
+
+            CheckedChanged(null, null);
+
+
         }
 
-      
+        private void CheckedChanged(object sender, RoutedEventArgs e)
+        {
+
+
+            if(cbEnabled.IsChecked.Value == false)
+            {
+                //disable all
+                cycleValue.IsEnabled = false;
+                cycleUnit.IsEnabled = false;
+                cbEver.IsEnabled = false;
+
+
+                timeHourFrom.IsEnabled = false;
+                timeMinuteFrom.IsEnabled = false;
+                timeHourTo.IsEnabled = false;
+                timeMinuteTo.IsEnabled = false;
+                cbContinuous.IsEnabled = false;
+
+            }
+            else
+            {
+                //enable all
+                cbEver.IsEnabled = true;
+
+                if (cbEver.IsChecked.Value == true)
+                {
+                    //disable
+                    cycleValue.IsEnabled = false;
+                    cycleUnit.IsEnabled = false;
+                }
+                else
+                {
+                    //enable
+                    cycleValue.IsEnabled = true;
+                    cycleUnit.IsEnabled = true;
+                }
+
+                cbContinuous.IsEnabled = true;
+                if (cbContinuous.IsChecked.Value == true)
+                {
+                    //disable
+                    timeHourFrom.IsEnabled = false;
+                    timeMinuteFrom.IsEnabled = false;
+                    timeHourTo.IsEnabled = false;
+                    timeMinuteTo.IsEnabled = false;
+                }
+                else
+                {
+                    //enable
+                    timeHourFrom.IsEnabled = true;
+                    timeMinuteFrom.IsEnabled = true;
+                    timeHourTo.IsEnabled = true;
+                    timeMinuteTo.IsEnabled = true;
+                }
+
+            }
+
+
+        }
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
             Job.Config.Type = JobType.Java;
