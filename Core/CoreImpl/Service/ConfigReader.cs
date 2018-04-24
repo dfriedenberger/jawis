@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CoreImpl.Service
 {
-    class ConfigReader : IConfigReader
+    public class ConfigReader : IConfigReader
     {
         private readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -85,10 +85,15 @@ namespace CoreImpl.Service
             var files = Directory.GetFiles(_pathService.StatusPath, "*_" + key + ".txt");
             foreach(var file in files)
             {
-                var lines = File.ReadAllLines(file);
+                var lines = File.ReadAllLines(file, Encoding.UTF8);
                 foreach(var line in lines)
                 {
                     var obj = JsonConvert.DeserializeObject<T>(line);
+                    if(obj == null)
+                    {
+                        _log.Error("No Object found in line file:" + file + " line:" + line);
+                        continue;
+                    }
                     lst.Add(obj);
                 }
             }
